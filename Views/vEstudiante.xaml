@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="fushcasinaS6A.Views.vEstudiante"
              Title="vEstudiante">
-    <VerticalStackLayout>
+    <VerticalStackLayout Padding="10"
+                         Spacing="10">
         <Label
             Text="Semana 6: Servicios Web - Estudiante"
             VerticalOptions="Center"
@@ -15,20 +16,95 @@
                TextColor="Red"
                HorizontalOptions="Center"/>
 
-        <ListView x:Name="listaEstudiante">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
+        <!-- Tabla: el fondo negro con espacio de 1 entre celdas dibuja los bordes -->
+        <VerticalStackLayout>
 
-                            <Label Text="{Binding nombre}"/>
-                            <Label Text="{Binding apellido}"/>
+            <!-- Encabezado de la tabla -->
+            <Grid BackgroundColor="Black"
+                  Padding="1"
+                  ColumnSpacing="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
 
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                <Label Text="Codigo"
+                       BackgroundColor="Yellow"
+                       TextColor="Navy"
+                       FontAttributes="Bold"
+                       Padding="5"
+                       Grid.Column="0"/>
+                <Label Text="Nombre"
+                       BackgroundColor="Yellow"
+                       TextColor="Navy"
+                       FontAttributes="Bold"
+                       Padding="5"
+                       Grid.Column="1"/>
+                <Label Text="Apellido"
+                       BackgroundColor="Yellow"
+                       TextColor="Navy"
+                       FontAttributes="Bold"
+                       Padding="5"
+                       Grid.Column="2"/>
+                <Label Text="Edad"
+                       BackgroundColor="Yellow"
+                       TextColor="Navy"
+                       FontAttributes="Bold"
+                       Padding="5"
+                       Grid.Column="3"/>
+            </Grid>
+
+            <!-- Filas de la tabla: una por cada estudiante del servicio web -->
+            <ListView x:Name="listaEstudiante"
+                      SelectionMode="None"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="Black"
+                                  Padding="1,0,1,1"
+                                  ColumnSpacing="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding codigo}"
+                                       BackgroundColor="White"
+                                       TextColor="Black"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       Padding="5"
+                                       Grid.Column="0"/>
+                                <Label Text="{Binding nombre}"
+                                       BackgroundColor="White"
+                                       TextColor="Black"
+                                       VerticalTextAlignment="Center"
+                                       Padding="5"
+                                       Grid.Column="1"/>
+                                <Label Text="{Binding apellido}"
+                                       BackgroundColor="White"
+                                       TextColor="Black"
+                                       VerticalTextAlignment="Center"
+                                       Padding="5"
+                                       Grid.Column="2"/>
+                                <Label Text="{Binding edad}"
+                                       BackgroundColor="White"
+                                       TextColor="Black"
+                                       VerticalTextAlignment="Center"
+                                       Padding="5"
+                                       Grid.Column="3"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </VerticalStackLayout>
 
     </VerticalStackLayout>
 </ContentPage>
