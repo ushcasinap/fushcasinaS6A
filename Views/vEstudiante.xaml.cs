@@ -6,12 +6,11 @@ namespace fushcasinaS6A.Views;
 
 public partial class vEstudiante : ContentPage
 {
-    // URL del servicio web en XAMPP (la misma que se prueba en Postman)
-    // En Windows se usa localhost; en el emulador Android localhost es el propio emulador, por eso se usa 10.0.2.2
+    
     private readonly string Url = DeviceInfo.Platform == DevicePlatform.Android
         ? "http://10.0.2.2/ws_estudiante/estudiante_ws.php"
         : "http://localhost/ws_estudiante/estudiante_ws.php";
-    //protocolo de comunicacion http
+    
     private readonly HttpClient client = new HttpClient();
     //coleccion de datos
     private ObservableCollection<Estudiante> _estudiante = new ObservableCollection<Estudiante>();
@@ -19,6 +18,13 @@ public partial class vEstudiante : ContentPage
     public vEstudiante()
     {
         InitializeComponent();
+    }
+
+    // Se ejecuta cada vez que se muestra la pagina:
+    // asi la lista se actualiza al regresar de agregar un estudiante
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
         MostrarEstudiantes();
     }
 
@@ -37,4 +43,24 @@ public partial class vEstudiante : ContentPage
             lblMensaje.Text = "Error: " + ex.Message;
         }
     }
+
+    private async void btnAgregarEstudiante_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new vAgregarEstudiante());
+    }
+
+    private async void listaEstudiante_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+       
+        if (e.SelectedItem == null)
+            return;
+
+        var ObjetoEstudiante = (Estudiante)e.SelectedItem;
+
+        // Quitar la seleccion para poder volver a tocar el mismo estudiante
+        listaEstudiante.SelectedItem = null;
+
+        await Navigation.PushAsync(new vActualizarEliminar(ObjetoEstudiante));
+    }
 }
+

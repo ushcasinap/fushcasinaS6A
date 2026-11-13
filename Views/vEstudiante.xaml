@@ -57,8 +57,10 @@
             </Grid>
 
             <!-- Filas de la tabla: una por cada estudiante del servicio web -->
+            <!-- Al tocar un estudiante se abre la ventana Actualizar/Eliminar -->
             <ListView x:Name="listaEstudiante"
-                      SelectionMode="None"
+                      SelectionMode="Single"
+                      ItemSelected="listaEstudiante_ItemSelected"
                       SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -103,6 +105,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
+            <Button x:Name="btnAgregarEstudiante"
+                    Text="Agregar Estudiante"
+                    Clicked="btnAgregarEstudiante_Clicked"/>
 
         </VerticalStackLayout>
 
